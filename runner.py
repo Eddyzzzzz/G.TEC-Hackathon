@@ -26,7 +26,7 @@ if __name__ == "__main__":
         with torch.no_grad():
             output = model(input_tensor)
             prob = torch.softmax(output, dim=1)[0, 1].item()
-            print(f"Prediction prob: {prob:.3f}")
+            #print(f"Prediction prob: {prob:.3f}")
 
             if prob > THRESHOLD:
                 print("Trigger detected! Sending MQTT message: open")
