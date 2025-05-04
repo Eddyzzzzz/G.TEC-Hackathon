@@ -62,6 +62,9 @@ def chat_with_gpt(user_message):
         # === Speak the reply ===
         speak_text_async(reply)
 
+        # 👇 Keep chatting after responding
+        voice_input()
+
     except Exception as e:
         print("ChatGPT error:", e)
 
@@ -78,7 +81,7 @@ def handle_command(cmd):
             last_user_msg = conversation_history[-2]["content"]
             chat_with_gpt(last_user_msg)
     elif cmd == "close":
-        root.quit()  # <-- Remove or comment out this line to keep the app running
+        print("Close command received, but app will stay open.")
     else:
         print(f"Unknown command: {cmd}")
 
