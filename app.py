@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-openai_client = OpenAI(api_key="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")
+openai_client = OpenAI(api_key="")
 import paho.mqtt.client as mqtt
 import pyttsx3
 import tkinter as tk
@@ -11,7 +11,7 @@ import speech_recognition as sr
 MQTT_BROKER = "test.mosquitto.org"
 MQTT_PORT = 1883
 MQTT_TOPIC = "brain/commands"
-OPENAI_API_KEY = "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" 
+OPENAI_API_KEY = "" 
 
 conversation_history = [{"role": "system", "content": "You are a helpful assistant."}]
 
