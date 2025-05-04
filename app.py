@@ -17,7 +17,6 @@ conversation_history = [{"role": "system", "content": "You are a helpful assista
 tts_engine = pyttsx3.init()
 tts_engine.setProperty('rate', 180)
 
-
 # === GUI Setup ===
 root = tk.Tk()
 root.title("Brain-Controlled ChatGPT")
