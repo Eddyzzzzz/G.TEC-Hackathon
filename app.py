@@ -1,6 +1,4 @@
 from openai import OpenAI
-
-openai_client = OpenAI(api_key="xxx")
 import paho.mqtt.client as mqtt
 import pyttsx3
 import tkinter as tk
@@ -11,17 +9,14 @@ import speech_recognition as sr
 MQTT_BROKER = "test.mosquitto.org"
 MQTT_PORT = 1883
 MQTT_TOPIC = "brain/commands"
-OPENAI_API_KEY = "xxx" 
-
+OPENAI_API_KEY = "" 
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
 conversation_history = [{"role": "system", "content": "You are a helpful assistant."}]
 
 # === Initialize TTS ===
 tts_engine = pyttsx3.init()
 tts_engine.setProperty('rate', 180)
 
-def speak(text):
-    tts_engine.say(text)
-    tts_engine.runAndWait()
 
 # === GUI Setup ===
 root = tk.Tk()
@@ -55,7 +50,6 @@ def chat_with_gpt(user_message):
         )
         reply = response.choices[0].message.content
         conversation_history.append({"role": "assistant", "content": reply})
-        speak(reply)  # This line reads out the ChatGPT reply
         update_gui("Response generated", user_message, reply)
     except Exception as e:
         print("ChatGPT error:", e)
@@ -65,19 +59,15 @@ def handle_command(cmd):
     cmd = cmd.lower().strip()
     update_gui(cmd)
 
-    if cmd == "chatgpt":
+    if cmd == "open":
         print("ChatGPT ready.")
         voice_input()
     elif cmd == "a new response":
         if len(conversation_history) >= 2:
             last_user_msg = conversation_history[-2]["content"]
             chat_with_gpt(last_user_msg)
-    elif cmd == "close chatgpt":
-        speak("Closing ChatGPT.")
-        # root.quit()
-    elif cmd.startswith("say "):
-        user_msg = cmd[4:]
-        chat_with_gpt(user_msg)
+    elif cmd == "close":
+        root.quit()  # <-- Remove or comment out this line to keep the app running
     else:
         print(f"Unknown command: {cmd}")
 
