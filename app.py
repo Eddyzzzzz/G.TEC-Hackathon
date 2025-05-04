@@ -5,6 +5,8 @@ import tkinter as tk
 from tkinter import scrolledtext
 import speech_recognition as sr
 import threading
+import queue
+
 
 # === CONFIGURATION ===
 MQTT_BROKER = "test.mosquitto.org"
@@ -17,6 +19,18 @@ conversation_history = [{"role": "system", "content": "You are a helpful assista
 # === Initialize TTS ===
 tts_engine = pyttsx3.init()
 tts_engine.setProperty('rate', 180)
+speech_queue = queue.Queue()
+
+def tts_worker():
+    while True:
+        text = speech_queue.get()
+        if text is None:
+            break  # Stop thread
+        tts_engine.say(text)
+        tts_engine.runAndWait()
+        speech_queue.task_done()
+
+threading.Thread(target=tts_worker, daemon=True).start()
 
 # === GUI Setup ===
 root = tk.Tk()
@@ -42,10 +56,7 @@ def update_gui(command, user_msg=None, gpt_reply=None):
 
 # === Speak in the background ===
 def speak_text_async(text):
-    def speak():
-        tts_engine.say(text)
-        tts_engine.runAndWait()
-    threading.Thread(target=speak, daemon=True).start()
+    speech_queue.put(text)
 
 # === ChatGPT Interaction ===
 def chat_with_gpt(user_message):
