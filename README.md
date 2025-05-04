@@ -25,3 +25,7 @@ python3 app.py
 - runner.py simulates EEG data → detects trigger → sends "open" via MQTT.
 - app.py receives "open" → activates voice input → sends to ChatGPT → reads reply.
 - Requires OpenAI API key in app.py.
+
+## Achnowledgements
+
+This project was developed during [BR41N.IO Spring School 2025](https://www.br41n.io/Spring-School-2025).
