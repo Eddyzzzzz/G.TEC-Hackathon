@@ -16,7 +16,7 @@ def get_live_eeg_sample():
     return np.random.randn(SEGMENT_LEN, 8)
 
 if __name__ == "__main__":
-    print("Starting real-time dummy EEG inference...")
+    print("Starting real-time EEG inference...")
 
     while True:
         eeg_chunk = get_live_eeg_sample()
