@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-openai_client = OpenAI(api_key="")
+openai_client = OpenAI(api_key="xxx")
 import paho.mqtt.client as mqtt
 import pyttsx3
 import tkinter as tk
@@ -11,7 +11,7 @@ import speech_recognition as sr
 MQTT_BROKER = "test.mosquitto.org"
 MQTT_PORT = 1883
 MQTT_TOPIC = "brain/commands"
-OPENAI_API_KEY = "" 
+OPENAI_API_KEY = "xxx" 
 
 conversation_history = [{"role": "system", "content": "You are a helpful assistant."}]
 
