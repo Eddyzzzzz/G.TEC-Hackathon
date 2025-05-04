@@ -1,16 +1,17 @@
 from openai import OpenAI
 
-openai_client = OpenAI(api_key="")
+openai_client = OpenAI(api_key="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")
 import paho.mqtt.client as mqtt
 import pyttsx3
 import tkinter as tk
 from tkinter import scrolledtext
+import speech_recognition as sr
 
 # === CONFIGURATION ===
 MQTT_BROKER = "test.mosquitto.org"
 MQTT_PORT = 1883
 MQTT_TOPIC = "brain/commands"
-OPENAI_API_KEY = "" 
+OPENAI_API_KEY = "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" 
 
 conversation_history = [{"role": "system", "content": "You are a helpful assistant."}]
 
@@ -54,8 +55,8 @@ def chat_with_gpt(user_message):
         )
         reply = response.choices[0].message.content
         conversation_history.append({"role": "assistant", "content": reply})
+        speak(reply)  # This line reads out the ChatGPT reply
         update_gui("Response generated", user_message, reply)
-        speak(reply)
     except Exception as e:
         print("ChatGPT error:", e)
 
@@ -66,13 +67,14 @@ def handle_command(cmd):
 
     if cmd == "chatgpt":
         print("ChatGPT ready.")
+        voice_input()
     elif cmd == "a new response":
         if len(conversation_history) >= 2:
             last_user_msg = conversation_history[-2]["content"]
             chat_with_gpt(last_user_msg)
     elif cmd == "close chatgpt":
         speak("Closing ChatGPT.")
-        root.quit()
+        # root.quit()
     elif cmd.startswith("say "):
         user_msg = cmd[4:]
         chat_with_gpt(user_msg)
@@ -102,5 +104,25 @@ import threading
 mqtt_thread = threading.Thread(target=mqtt_client.loop_forever)
 mqtt_thread.daemon = True
 mqtt_thread.start()
+
+def voice_input():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        update_gui("Listening for your question...")
+        try:
+            audio = recognizer.listen(source, timeout=5)
+            user_text = recognizer.recognize_google(audio)
+            update_gui("Voice Input Received", user_text)
+            chat_with_gpt(user_text)
+        except sr.WaitTimeoutError:
+            update_gui("No speech detected. Please try again.")
+        except sr.UnknownValueError:
+            update_gui("Could not understand audio.")
+        except Exception as e:
+            update_gui(f"Voice input error: {e}")
+
+# Add a button to the GUI for voice input
+voice_btn = tk.Button(root, text="Voice Input", command=voice_input)
+voice_btn.pack(pady=5)
 
 root.mainloop()
