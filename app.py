@@ -136,7 +136,7 @@ def voice_input():
             update_gui(f"Voice input error: {e}")
 
 # Add a button to the GUI for voice input
-voice_btn = tk.Button(root, text="Voice Input", command=voice_input)
-voice_btn.pack(pady=5)
+#voice_btn = tk.Button(root, text="Voice Input", command=voice_input)
+#voice_btn.pack(pady=5)
 
 root.mainloop()
