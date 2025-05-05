@@ -6,7 +6,7 @@ A real-time EEG-based intent detector that triggers a ChatGPT voice assistant vi
 
 <p align="left">
   <a href="https://docs.google.com/presentation/d/1ATDAViMGEZEGJ7OFfEbvGqKSl-iMVAZM/edit?usp=sharing&ouid=114411754495736577659&rtpof=true&sd=true" target="_blank">
-    <img src="https://img.shields.io/badge/View%20Final%20Report-blue?style=for-the-badge" alt="View Presentation">
+    <img src="https://img.shields.io/badge/View%20Presentation-blue?style=for-the-badge" alt="View Presentation">
   </a>
   &nbsp;
   <a href="https://drive.google.com/file/d/1VJSqVCjtSaDPo2jxpAOs2tgSBSYcSG3M/view?usp=sharing" target="_blank">
