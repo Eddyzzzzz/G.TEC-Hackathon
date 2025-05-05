@@ -2,6 +2,18 @@
 
 A real-time EEG-based intent detector that triggers a ChatGPT voice assistant via MQTT.
 
+## Results 
+
+<p align="left">
+  <a href="https://docs.google.com/presentation/d/1ATDAViMGEZEGJ7OFfEbvGqKSl-iMVAZM/edit?usp=sharing&ouid=114411754495736577659&rtpof=true&sd=true" target="_blank">
+    <img src="https://img.shields.io/badge/View%20Final%20Report-blue?style=for-the-badge" alt="View Presentation">
+  </a>
+  &nbsp;
+  <a href="https://drive.google.com/file/d/1VJSqVCjtSaDPo2jxpAOs2tgSBSYcSG3M/view?usp=sharing" target="_blank">
+    <img src="https://img.shields.io/badge/View%20Demo-green?style=for-the-badge" alt="View Demo">
+  </a>
+</p>
+
 ## Setup
 
 ```bash
